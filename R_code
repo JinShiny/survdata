@@ -1,0 +1,18 @@
+
+d <- read.csv("H:\\1New\\1LSCC\\d.csv")
+library(survival)
+library(survIDINRI)
+
+str(d$specific)
+str(d$Survivalmonths)
+d$Survivalmonths <- as.numeric(d$Survivalmonths)
+
+t0 = 120
+Y <- Train[,c("Survivalmonths","specific")]
+z.old = as.matrix(Train[,c("Age","Sex")])
+z.new = as.matrix(Train[,c("Age","Sex","Race","Laterality")])
+
+X <- IDI.INF(d[,5:6],z.old,z.new,t0,npert=200)
+IDI.INF.OUT(X)
+
+#Error in Surv(xi, di) : Time variable is not numeric
